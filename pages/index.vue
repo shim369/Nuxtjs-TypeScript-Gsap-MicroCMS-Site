@@ -143,7 +143,7 @@
                   with
                   Astro, server-side rendering with Next.js and Nuxt.js, back-end development with Python and Django,
                   and
-                  even design and prototyping with Newt and Figma. These are just some of the skills I bring to the
+                  content management with microCMS, and even design and prototyping with Figma. These are just some of the skills I bring to the
                   table.
                 </p>
                 <NuxtLink to="/skills" class="detail-btn">Show Detail</NuxtLink>

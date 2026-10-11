@@ -50,8 +50,8 @@ const skills = ref([
         description: 'Building efficient and secure back-end systems is one of my core skills. I develop robust systems using Python and Django.'
     },
     {
-        title: 'Newt Blog and Contact Features',
-        description: 'Newt serves as the backbone of our website, enabling the seamless integration of blog and contact features. This simplifies content management and streamlines website development.'
+        title: 'microCMS Blog and Contact Features',
+        description: 'microCMS serves as the backbone of our blog, letting content be managed separately from the code, while the contact form runs on Nuxt server routes. This simplifies content management and streamlines website development.'
     },
     {
         title: 'UI/UX Design and Prototyping with Figma',
