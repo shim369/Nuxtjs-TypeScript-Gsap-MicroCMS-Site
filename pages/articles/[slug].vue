@@ -8,9 +8,9 @@
           <div class="blog-detail-inner">
             <div class="date">
               <i class="material-icons">schedule</i>
-              {{ formatDate(article.date) }}
+              {{ formatDate(article.publishedAt) }}
             </div>
-            <div v-html="article?.body" class="blog-body">
+            <div v-html="article?.content" class="blog-body">
             </div>
           </div>
         </div>
@@ -23,19 +23,16 @@
 import type { Article } from '~/types/article'
 
 const route = useRoute()
-const { slug } = route.params
+const slug = route.params.slug as string
 
-const { data } = await useAsyncData(`article-${slug}`, async () => {
-  const { $newtClient } = useNuxtApp()
-  return await $newtClient.getFirstContent<Article>({
-    appUid: 'blog',
-    modelUid: 'article',
-    query: {
-      slug,
-      select: ['_id', 'title', 'slug', 'body', 'coverImage', 'category', 'date']
-    }
+const { data, error } = await useFetch<Article>(`/api/blogs/${slug}`, { key: `article-${slug}` })
+if (error.value) {
+  throw createError({
+    statusCode: error.value.statusCode ?? 500,
+    statusMessage: error.value.statusMessage,
+    fatal: true
   })
-})
+}
 const article = data.value
 
 useHead({
@@ -45,7 +42,7 @@ useHead({
   ]
 })
 
-const formatDate = (dateString: Date) => {
+const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');

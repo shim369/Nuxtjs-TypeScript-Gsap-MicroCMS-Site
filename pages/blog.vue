@@ -5,12 +5,12 @@
 			<h1>Blog</h1>
       <p class="read-text" data-aos="fade-up">This blog is powered by a headless CMS. It offers the flexibility to use any tech stack and allows for content reuse across multiple platforms. The system ensures fast performance even under high traffic, reduces security risks, and provides centralized content management.</p>   
       <div class="blog-item-box">
-        <div v-for="article in articles" :key="article._id" class="blog-item" data-aos="fade-up">
-          <NuxtLink :to="`/articles/${article.slug}`" :title="`${article.title}`">
-            <img :src="article.coverImage.src" :alt="`Cover image for ${article.title}`" width="400" height="300" loading="lazy" />
+        <div v-for="article in articles" :key="article.id" class="blog-item" data-aos="fade-up">
+          <NuxtLink :to="`/articles/${article.id}`" :title="`${article.title}`">
+            <img :src="article.eyecatch?.url" :alt="`Cover image for ${article.title}`" width="400" height="300" loading="lazy" />
             <div class="date">
               <i class="material-icons">schedule</i>
-              {{ formatDate(article.date) }}
+              {{ formatDate(article.publishedAt) }}
             </div>
             <h2>{{ article.title }}</h2>
           </NuxtLink>
@@ -20,22 +20,12 @@
 	</main>
 </template>
 <script setup lang="ts">
-import type { Article } from '~/types/article'
-import { useAsyncData, useNuxtApp } from '#app'
+import type { ArticleResponse } from '~/types/article'
 
-const { data } = await useAsyncData('articles', async () => {
-  const { $newtClient } = useNuxtApp()
-  return await $newtClient.getContents<Article>({
-    appUid: 'blog',
-    modelUid: 'article',
-    query: {
-      select: ['_id', 'title', 'slug', 'body', 'coverImage', 'category', 'date']
-    }
-  })
-})
-const articles = data.value?.items ?? []
+const { data } = await useFetch<ArticleResponse>('/api/blogs', { key: 'articles' })
+const articles = data.value?.contents ?? []
 
-const formatDate = (dateString: Date) => {
+const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');

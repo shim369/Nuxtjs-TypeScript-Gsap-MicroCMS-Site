@@ -34,17 +34,24 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    public: {
-      newt: {
-        spaceUid: process.env.NEWT_SPACE_UID,
-        token: process.env.NEWT_CDN_API_TOKEN
-      }
-    }
+    // サーバー側のみで使用（クライアントには公開しない）
+    microcms: {
+      serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN,
+      apiKey: process.env.MICROCMS_API_KEY
+    },
+    contact: {
+      to: process.env.CONTACT_TO_EMAIL,
+      smtpHost: process.env.SMTP_HOST || 'smtp.gmail.com',
+      smtpPort: process.env.SMTP_PORT || '465',
+      smtpUser: process.env.SMTP_USER,
+      smtpPass: process.env.SMTP_PASS
+    },
+    recaptchaSecretKey: process.env.RECAPTCHA_SECRET_KEY
   },
   typescript: {
     typeCheck: true
   },
   css: [
-    '/assets/css/style.css',
+    '~/assets/scss/style.scss',
   ]
 })

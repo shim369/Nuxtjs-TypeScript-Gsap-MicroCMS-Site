@@ -117,9 +117,9 @@
           <p class="news-title">Latest News</p>
           <div class="news-list" v-if="latestBlog">
             <dl>
-              <dt>{{ formatDate(latestBlog.date) }}</dt>
+              <dt>{{ formatDate(latestBlog.publishedAt) }}</dt>
               <dd>
-                <NuxtLink :to="`/articles/${latestBlog.slug}`">{{ latestBlog.title }}</NuxtLink>
+                <NuxtLink :to="`/articles/${latestBlog.id}`">{{ latestBlog.title }}</NuxtLink>
               </dd>
             </dl>
           </div>
@@ -163,27 +163,27 @@
           <div class="main-left-contents" data-aos="fade-left">
             <div class="blog-item-flex">
               <div class="blog-item-bg" v-if="latestBlog">
-                <NuxtLink :to="`/articles/${latestBlog.slug}`">
-                  <img :src="latestBlog.coverImage.src" :width="400" :height="300"
+                <NuxtLink :to="`/articles/${latestBlog.id}`">
+                  <img :src="latestBlog.eyecatch?.url" :width="400" :height="300"
                     :alt="`Cover image for ${latestBlog.title}`" />
                   <div>
                     <div class="date">
                       <i class="material-icons">schedule</i>
-                      {{ formatDate(latestBlog.date) }}
+                      {{ formatDate(latestBlog.publishedAt) }}
                     </div>
                     <h3>{{ latestBlog.title }}</h3>
                   </div>
                 </NuxtLink>
               </div>
               <div class="blog-item-sm-box">
-                <div class="blog-item-sm" v-for="article in nextBlogs" :key="article._id">
-                  <NuxtLink :to="`/articles/${article.slug}`">
-                    <img :src="article.coverImage.src" :width="400" :height="300"
+                <div class="blog-item-sm" v-for="article in nextBlogs" :key="article.id">
+                  <NuxtLink :to="`/articles/${article.id}`">
+                    <img :src="article.eyecatch?.url" :width="400" :height="300"
                       :alt="`Cover image for ${article.title}`" />
                     <div>
                       <div class="date">
                         <i class="material-icons">schedule</i>
-                        {{ formatDate(article.date) }}
+                        {{ formatDate(article.publishedAt) }}
                       </div>
                       <h3>{{ article.title }}</h3>
                     </div>
@@ -208,22 +208,10 @@
 import { computed, onMounted } from 'vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import type { Article } from '~/types/article';
-import { useAsyncData, useNuxtApp } from '#app';
+import type { ArticleResponse } from '~/types/article';
 
-const fetchData = async () => {
-  const { $newtClient } = useNuxtApp();
-  return await $newtClient.getContents<Article>({
-    appUid: 'blog',
-    modelUid: 'article',
-    query: {
-      select: ['_id', 'title', 'slug', 'body', 'coverImage', 'category', 'date']
-    }
-  });
-};
-
-const { data } = await useAsyncData<{ items: Article[] }>('articles', fetchData);
-const articles = data.value?.items ?? [];
+const { data } = await useFetch<ArticleResponse>('/api/blogs', { key: 'articles' });
+const articles = data.value?.contents ?? [];
 
 const latestBlog = computed(() => {
   return articles ? articles[0] : null;
@@ -333,7 +321,7 @@ onMounted(() => {
   }
 });
 
-const formatDate = (dateString: Date) => {
+const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');

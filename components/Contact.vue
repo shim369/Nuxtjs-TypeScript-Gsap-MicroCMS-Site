@@ -73,27 +73,13 @@ const recaptchaInstance = useReCaptcha()
 const onSubmit = handleSubmit(async (values) => {
 	await recaptchaInstance?.recaptchaLoaded()
 	const token = await recaptchaInstance?.executeRecaptcha('submit')
-	values.googleReCaptchaToken = token
-
-	const formData = new FormData()
-	Object.entries(values).forEach(([key, value]) => {
-		formData.append(key, value)
-	})
 
 	try {
-		const response = await fetch('https://shim.form.newt.so/v1/vUf_6rML6', {
+		await $fetch('/api/contact', {
 			method: 'POST',
-			body: formData,
-			headers: {
-			Accept: 'application/json'
-		}
-	})
-
-	if (response.ok) {
+			body: { ...values, googleReCaptchaToken: token }
+		})
 		await navigateTo('/thanks')
-	} else {
-		await navigateTo('/error')
-	}
 	} catch (err) {
 		await navigateTo('/error')
 	}

@@ -1,11 +1,24 @@
+import type { MicroCMSImage } from 'microcms-js-sdk'
+
+export interface Category {
+	name: string
+}
+
 export interface Article {
-    _id: string
-    title: string
-    slug: string
-    body: string
-	coverImage: HTMLImageElement
-	category: {
-		name: string
-	}
-	date: Date
+	id: string
+	createdAt: string
+	updatedAt: string
+	publishedAt: string
+	revisedAt: string
+	title: string
+	content: string
+	eyecatch?: MicroCMSImage
+	category: Category
+}
+
+export interface ArticleResponse {
+	totalCount: number
+	offset: number
+	limit: number
+	contents: Article[]
 }
