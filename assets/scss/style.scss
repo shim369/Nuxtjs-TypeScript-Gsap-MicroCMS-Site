@@ -1047,7 +1047,6 @@ section {
 	display: flex;
 	align-items: center;
 	margin-top: .4rem;
-	margin-bottom: 5rem;
 
 	i {
 		font-size: 1.1rem;
@@ -1065,6 +1064,7 @@ section {
 
 	.blog-body {
 		line-height: 1.6rem;
+		margin-top: 5rem;
 
 		img {
 			margin: 1rem 0;
