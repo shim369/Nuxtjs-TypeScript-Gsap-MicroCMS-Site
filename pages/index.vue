@@ -111,101 +111,141 @@
         <p class="section-title about-title">About</p>
       </div>
     </section>
-    <section class="main-section">
-      <div class="news-content">
-        <div data-aos="fade-left">
-          <p class="news-title">Latest News</p>
-          <div class="news-list" v-if="latestBlog">
-            <dl>
-              <dt>{{ formatDate(latestBlog.publishedAt) }}</dt>
-              <dd>
-                <NuxtLink :to="`/articles/${latestBlog.id}`">{{ latestBlog.title }}</NuxtLink>
-              </dd>
-            </dl>
-          </div>
-        </div>
-      </div>
-      <div class="main-inner">
-        <div class="main-left-side">
-          <p data-aos="fade-down">Skills</p>
-        </div>
-        <div class="main-right-side">
-          <p class="section-title skills-title" data-aos="fade-left">Skills</p>
-          <div class="main-right-contents">
-            <div data-aos="fade-right">
-              <div class="text-title">
-                <h2 class="bg-title">My Journey in Tech<br>From JavaScript to a Diverse Skillset</h2>
-              </div>
-              <div class="text-container">
-                <p>When I first embarked on my programming journey, I started with JavaScript. Since then, my skill set
-                  has
-                  expanded to include a variety of frameworks and languages. I'm proficient in static site generation
-                  with
-                  Astro, server-side rendering with Next.js and Nuxt.js, back-end development with Python and Django,
-                  and
-                  content management with microCMS, and even design and prototyping with Figma. These are just some of the skills I bring to the
-                  table.
-                </p>
-                <NuxtLink to="/skills" class="detail-btn">Show Detail</NuxtLink>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- ===== Latest News ===== -->
+    <section v-if="latestBlog" class="s news" aria-label="Latest News">
+      <div class="container news-in">
+        <span class="news-label"><i class="dot"></i>Latest News</span>
+        <time :datetime="latestBlog.publishedAt">{{ formatDate(latestBlog.publishedAt) }}</time>
+        <NuxtLink class="news-link" :to="`/articles/${latestBlog.id}`"><span>{{ latestBlog.title }}</span></NuxtLink>
+        <NuxtLink class="news-all" to="/blog">All posts
+          <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.4" /></svg>
+        </NuxtLink>
       </div>
     </section>
-    <section class="bg-p">
-      <h2 data-aos="fade-up">Web Development</h2>
-    </section>
-    <section class="main-section">
-      <div class="main-inner">
-        <div class="main-left-side2">
-          <p class="section-title blogs-title" data-aos="fade-left">Blog</p>
-          <div class="main-left-contents" data-aos="fade-left">
-            <div class="blog-item-flex">
-              <div class="blog-item-bg" v-if="latestBlog">
-                <NuxtLink :to="`/articles/${latestBlog.id}`">
-                  <img :src="latestBlog.eyecatch?.url" :width="400" :height="300"
-                    :alt="`Cover image for ${latestBlog.title}`" />
-                  <div>
-                    <div class="date">
-                      <i class="material-icons">schedule</i>
-                      {{ formatDate(latestBlog.publishedAt) }}
-                    </div>
-                    <h3>{{ latestBlog.title }}</h3>
-                  </div>
-                </NuxtLink>
-              </div>
-              <div class="blog-item-sm-box">
-                <div class="blog-item-sm" v-for="article in nextBlogs" :key="article.id">
-                  <NuxtLink :to="`/articles/${article.id}`">
-                    <img :src="article.eyecatch?.url" :width="400" :height="300"
-                      :alt="`Cover image for ${article.title}`" />
-                    <div>
-                      <div class="date">
-                        <i class="material-icons">schedule</i>
-                        {{ formatDate(article.publishedAt) }}
-                      </div>
-                      <h3>{{ article.title }}</h3>
-                    </div>
-                  </NuxtLink>
-                </div>
-              </div>
-            </div>
+    <div v-else class="news" aria-hidden="true"></div>
 
-            <div>
-              <NuxtLink to="/blog" class="detail-btn">Show Detail</NuxtLink>
+    <!-- ===== Skills ===== -->
+    <section class="s skills" id="skills">
+      <div class="container">
+        <div class="sec-head">
+          <span class="eyebrow" data-reveal><span class="num">01</span>Skills</span>
+          <h2 class="display split">My Journey in Tech, <em>from JavaScript</em> to a Diverse Skillset</h2>
+        </div>
+        <div class="skills-grid">
+          <figure class="skills-visual">
+            <div class="badge" aria-hidden="true">
+              <svg viewBox="0 0 100 100"><defs><path id="circ" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0" /></defs><text font-family="Lato, sans-serif" font-size="8.6" font-weight="700" letter-spacing="3.2" fill="currentColor"><textPath href="#circ">MODERN JS · NUXT 3 · GSAP · TYPESCRIPT ·</textPath></text></svg>
             </div>
+            <div class="img-reveal"><img src="/keybord.webp" alt="キーボードのクローズアップ" loading="lazy"></div>
+            <figcaption><span>Since JavaScript</span><span>— Ever evolving</span></figcaption>
+          </figure>
+          <div class="skills-body">
+            <p class="lead" data-reveal>When I first embarked on my programming journey, I started with JavaScript. Since then, my skill set has expanded to include a variety of frameworks and languages. These are just some of the skills I bring to the table.</p>
+            <ul class="skill-rows">
+              <li v-for="(s, i) in skills" :key="s.name" class="skill-row" data-reveal>
+                <span class="n">{{ String(i + 1).padStart(2, '0') }}</span><h3>{{ s.name }}</h3><p>{{ s.role }}</p>
+              </li>
+            </ul>
+            <NuxtLink to="/skills" class="btn-line" data-reveal>Show Detail
+              <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M1 5h14M11 1l4 4-4 4" stroke="currentColor" stroke-width="1.4" /></svg>
+            </NuxtLink>
           </div>
         </div>
-        <div class="main-right-side2">
-          <p data-aos="fade-down">Blog</p>
+      </div>
+    </section>
+
+    <!-- ===== Marquee ===== -->
+    <section class="s marquee" aria-hidden="true">
+      <div class="mq-track">
+        <div class="mq-group" v-for="n in 2" :key="n"><span>Nuxt 3</span><i>✦</i><span class="o">TypeScript</span><i>✦</i><span>GSAP</span><i>✦</i><span class="o">microCMS</span><i>✦</i></div>
+      </div>
+    </section>
+
+    <!-- ===== Band ===== -->
+    <section class="s band" aria-labelledby="bandTitle">
+      <div class="band-media"><img src="/pc.webp" alt="" loading="lazy"></div>
+      <div class="band-content">
+        <span class="eyebrow light" data-reveal><span class="num">02</span>Craft</span>
+        <h2 class="band-title split" id="bandTitle">Web <em>Development</em></h2>
+        <p data-reveal>Fast, accessible and carefully animated experiences — built with modern JavaScript, from the first sketch to the final deploy.</p>
+      </div>
+    </section>
+
+    <!-- ===== Approach ===== -->
+    <section class="s approach" aria-labelledby="approachTitle">
+      <div class="container">
+        <div class="sec-head">
+          <span class="eyebrow" data-reveal><span class="num">03</span>Approach</span>
+          <h2 class="display split" id="approachTitle">Design, build, <em>and ship.</em></h2>
         </div>
+        <div class="steps">
+          <article class="step" data-reveal>
+            <span class="big">i.</span>
+            <h3>Design</h3>
+            <p>Ideas take shape as wireframes and interactive prototypes, so structure and motion are agreed before a single line of code.</p>
+            <div class="tags"><span>Figma</span><span>Prototyping</span></div>
+          </article>
+          <article class="step" data-reveal>
+            <span class="big">ii.</span>
+            <h3>Build</h3>
+            <p>Vue- and React-based frameworks with automatic routing, SSR and SSG — chosen to fit the project, typed end to end.</p>
+            <div class="tags"><span>Nuxt 3</span><span>Next.js</span><span>Astro</span><span>TypeScript</span></div>
+          </article>
+          <article class="step" data-reveal>
+            <span class="big">iii.</span>
+            <h3>Publish</h3>
+            <p>Content stays editable through a headless CMS, while a solid back end keeps forms, APIs and data reliable.</p>
+            <div class="tags"><span>microCMS</span><span>Python</span><span>Django</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Blog ===== -->
+    <section class="s blog" id="blog">
+      <div class="container">
+        <div class="sec-head row">
+          <div>
+            <span class="eyebrow" data-reveal><span class="num">04</span>Blog</span>
+            <h2 class="display split">Latest <em>Writing</em></h2>
+          </div>
+          <NuxtLink to="/blog" class="btn-line" data-reveal>Show Detail
+            <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M1 5h14M11 1l4 4-4 4" stroke="currentColor" stroke-width="1.4" /></svg>
+          </NuxtLink>
+        </div>
+        <div class="blog-grid" v-if="latestBlog">
+          <NuxtLink class="post post--feature" :to="`/articles/${latestBlog.id}`" data-reveal>
+            <div class="post-thumb"><img v-if="latestBlog.eyecatch?.url" :src="latestBlog.eyecatch.url" :alt="`Cover image for ${latestBlog.title}`" loading="lazy" width="400" height="300"></div>
+            <div class="post-meta"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5.3" stroke="currentColor" /><path d="M6 3v3l2 1.4" stroke="currentColor" /></svg><time :datetime="latestBlog.publishedAt">{{ formatDate(latestBlog.publishedAt) }}</time><span v-if="latestBlog.category?.name" class="cat">{{ latestBlog.category.name }}</span></div>
+            <h3 class="post-title"><span>{{ latestBlog.title }}</span></h3>
+          </NuxtLink>
+          <div class="post-list">
+            <NuxtLink v-for="article in nextBlogs" :key="article.id" class="post post--row" :to="`/articles/${article.id}`" data-reveal>
+              <div class="post-thumb"><img v-if="article.eyecatch?.url" :src="article.eyecatch.url" :alt="`Cover image for ${article.title}`" loading="lazy" width="400" height="300"></div>
+              <div>
+                <div class="post-meta"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5.3" stroke="currentColor" /><path d="M6 3v3l2 1.4" stroke="currentColor" /></svg><time :datetime="article.publishedAt">{{ formatDate(article.publishedAt) }}</time><span v-if="article.category?.name" class="cat">{{ article.category.name }}</span></div>
+                <h3 class="post-title"><span>{{ article.title }}</span></h3>
+              </div>
+            </NuxtLink>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="s cta" aria-labelledby="ctaTitle">
+      <div class="container cta-in">
+        <span class="eyebrow" data-reveal><span class="num">05</span>Let's talk</span>
+        <h2 class="cta-title split" id="ctaTitle">Ready to Embrace <em>Modern</em> Web Development?</h2>
+        <p data-reveal>Leading with Nuxt3, I leverage the latest JavaScript technologies to enhance your business or project's web presence quickly and efficiently. Join us now to create a next-generation web experience.</p>
+        <a href="#contact" class="btn-round magnetic" data-reveal><span class="lbl">Contact
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 12L12 2M4 2h8v8" stroke="currentColor" stroke-width="1.4" /></svg></span></a>
       </div>
     </section>
   </main>
 </template>
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, onBeforeUnmount } from 'vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import type { ArticleResponse } from '~/types/article';
@@ -221,8 +261,22 @@ const nextBlogs = computed(() => {
   return articles ? articles.slice(1, 4) : [];
 });
 
+const skills = [
+  { name: 'Astro', role: 'Static Site Generation' },
+  { name: 'Next.js', role: 'Server-Side Rendering' },
+  { name: 'Nuxt.js', role: 'Server-Side Rendering' },
+  { name: 'Python & Django', role: 'Back-end Development' },
+  { name: 'microCMS', role: 'Content Management' },
+  { name: 'Figma', role: 'Design & Prototyping' }
+];
+
+let ctx: gsap.Context | null = null;
+let cleanupReveal: (() => void) | null = null;
+const disposers: (() => void)[] = [];
+
 onMounted(() => {
   if (process.client) {
+    ctx = gsap.context(() => {
     const svg = document.querySelector<SVGSVGElement>('#svgTxt');
 
     if (svg) {
@@ -234,10 +288,20 @@ onMounted(() => {
 
         if (!isNaN(delay)) {
           setTimeout(() => {
+            const len = path.getTotalLength();
             path.style.stroke = '#916929';
-            path.style.strokeDasharray = path.getTotalLength().toString();
-            path.style.strokeDashoffset = path.getTotalLength().toString();
+            path.style.strokeWidth = '1.2';
+            path.style.strokeDasharray = `${len}`;
+            path.style.strokeDashoffset = `${len}`;
+            path.style.fill = '#916929';
+            path.style.fillOpacity = '0';
+            path.getBoundingClientRect(); // 強制リフロー: 非表示状態を確定させてから輪郭をなぞる
+            path.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(.65,0,.35,1), fill-opacity .7s ease';
             path.style.strokeDashoffset = '0';
+            // なぞり終わった後に塗りをふわっと表示
+            setTimeout(() => {
+              path.style.fillOpacity = '1';
+            }, 1500);
           }, delay);
         }
       });
@@ -252,7 +316,7 @@ onMounted(() => {
           overlay.style.display = "none";
         }, 1300);
       }
-    }, 1800);
+    }, 3200);
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -318,8 +382,89 @@ onMounted(() => {
       scrub: 1,
       pin: true,
     })
+    });
+
+    initDesign();
   }
 });
+
+onBeforeUnmount(() => {
+  ctx?.revert();
+  cleanupReveal?.();
+  disposers.forEach((d) => d());
+});
+
+/* ---------- hero 以外のインタラクション ---------- */
+const initDesign = () => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const $$ = <T extends Element = HTMLElement>(sel: string) => Array.from(document.querySelectorAll<T>(sel));
+
+  cleanupReveal = initReveal(document.querySelector('main') ?? document);
+
+  if (!reduce) {
+    const design = gsap.context(() => {
+      // skills image: 開くような表示 + パララックス
+      gsap.fromTo('.img-reveal', { clipPath: 'inset(100% 0% 0% 0%)' }, {
+        clipPath: 'inset(0% 0% 0% 0%)', duration: 1.6, ease: 'expo.inOut',
+        scrollTrigger: { trigger: '.img-reveal', start: 'top 80%', toggleActions: 'play none none none' }
+      });
+      gsap.fromTo('.img-reveal img', { yPercent: -10 }, {
+        yPercent: 0, ease: 'none',
+        scrollTrigger: { trigger: '.skills', start: 'top bottom', end: 'bottom top', scrub: true, toggleActions: 'play none none none' }
+      });
+
+      // band: 枠が広がる + 画像パララックス
+      gsap.to('.band-media', {
+        clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'none',
+        scrollTrigger: { trigger: '.band', start: 'top 85%', end: 'center center', scrub: 0.6, toggleActions: 'play none none none' }
+      });
+      gsap.to('.band-media img', {
+        yPercent: 12, ease: 'none',
+        scrollTrigger: { trigger: '.band', start: 'top bottom', end: 'bottom top', scrub: true, toggleActions: 'play none none none' }
+      });
+
+      // marquee: 無限ループ + スクロール速度に追従
+      const loop = gsap.to('.mq-track', { xPercent: -50, duration: 28, ease: 'none', repeat: -1 });
+      ScrollTrigger.create({
+        trigger: '.marquee', start: 'top bottom', end: 'bottom top',
+        onUpdate: (self) => {
+          const v = self.getVelocity();
+          const dir = self.direction;
+          gsap.to(loop, { timeScale: dir * Math.min(1 + Math.abs(v) / 400, 6), duration: 0.2, overwrite: true });
+          gsap.to(loop, { timeScale: dir, duration: 1.2, delay: 0.2, ease: 'power2.out' });
+        }
+      });
+    });
+    disposers.push(() => design.revert());
+  }
+
+  // magnetic button
+  if (finePointer && !reduce) {
+    $$('.magnetic').forEach((btn) => {
+      const lbl = btn.querySelector('.lbl');
+      const move = (e: MouseEvent) => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        gsap.to(btn, { x: x * 0.35, y: y * 0.35, duration: 0.6, ease: 'power3' });
+        gsap.to(lbl, { x: x * 0.15, y: y * 0.15, duration: 0.6, ease: 'power3' });
+      };
+      const leave = () => gsap.to([btn, lbl], { x: 0, y: 0, duration: 1, ease: 'elastic.out(1, .4)' });
+      btn.addEventListener('mousemove', move);
+      btn.addEventListener('mouseleave', leave);
+      disposers.push(() => {
+        btn.removeEventListener('mousemove', move);
+        btn.removeEventListener('mouseleave', leave);
+      });
+    });
+  }
+
+  const refresh = () => ScrollTrigger.refresh();
+  if (document.fonts?.ready) document.fonts.ready.then(refresh);
+  window.addEventListener('load', refresh);
+  disposers.push(() => window.removeEventListener('load', refresh));
+};
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);

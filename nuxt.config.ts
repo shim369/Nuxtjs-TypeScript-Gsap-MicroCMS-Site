@@ -10,7 +10,8 @@ export default defineNuxtConfig({
   ],
   googleFonts: {
     families: {
-      Lato: [300, 900],
+      Lato: [300, 400, 700, 900],
+      'Cormorant Garamond': { wght: [400, 500, 600], ital: [400, 500] },
       NanumMyeongjo: [700],
     },
   },
@@ -53,5 +54,6 @@ export default defineNuxtConfig({
   },
   css: [
     '~/assets/scss/style.scss',
+    '~/assets/scss/design.scss',
   ]
 })
