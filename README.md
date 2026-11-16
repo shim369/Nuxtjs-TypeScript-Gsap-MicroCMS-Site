@@ -1,7 +1,9 @@
 # Nuxt Base
 
-Nuxt 3 / TypeScript / GSAP / microCMS で作ったポートフォリオサイトです。
-ScrollTrigger によるヒーローのマスク拡大アニメーションと、ブログ(microCMS)・お問い合わせフォーム(Nodemailer + reCAPTCHA v3)を備えています。
+**English** | [日本語](README.ja.md)
+
+A portfolio site built with Nuxt 3, TypeScript, GSAP and microCMS.
+It features a ScrollTrigger-driven hero with a mask-zoom reveal, a microCMS-powered blog, and a self-hosted contact form (Nodemailer + reCAPTCHA v3).
 
 ## Screenshots
 
@@ -15,12 +17,12 @@ ScrollTrigger によるヒーローのマスク拡大アニメーションと、
 
 ## Features
 
-- ローディングで文字の輪郭をなぞって描画 → マスクが拡大してコンテンツが現れるヒーロー(GSAP ScrollTrigger)
-- Latest News / Skills / Marquee / Approach / Blog / CTA / Contact のトップページ構成
-- スクロール連動のテキスト・画像リビール、カスタムカーソル、スクロール進捗バー、マグネティックボタン
-- microCMS から取得するブログ一覧・記事詳細(`/api/blogs`、サーバールート経由で API キーを秘匿)
-- 自前のお問い合わせフォーム(vee-validate + reCAPTCHA v3 + Nodemailer)
-- `prefers-reduced-motion` 対応、レスポンシブ対応
+- Hero where the loader text is traced stroke by stroke, then a mask zooms in to reveal the content (GSAP ScrollTrigger)
+- Home page sections: Latest News / Skills / Marquee / Approach / Blog / CTA / Contact
+- Scroll-linked text and image reveals, custom cursor, scroll progress bar and magnetic buttons
+- Blog list and article pages fed by microCMS (`/api/blogs`; the API key stays on the server)
+- Self-hosted contact form (vee-validate + reCAPTCHA v3 + Nodemailer)
+- Responsive layout and `prefers-reduced-motion` support
 
 ## Tech Stack
 
@@ -28,40 +30,40 @@ ScrollTrigger によるヒーローのマスク拡大アニメーションと、
 - [GSAP](https://gsap.com/) + ScrollTrigger
 - [microCMS](https://microcms.io/)
 - Nodemailer / vee-validate / vue-recaptcha-v3
-- Sass、Google Fonts(Cormorant Garamond / Lato / Nanum Myeongjo)
+- Sass, Google Fonts (Cormorant Garamond / Lato / Nanum Myeongjo)
 
 ## Setup
 
 ```bash
 npm install
-cp .env.example .env   # 値を設定
+cp .env.example .env   # fill in the values
 npm run dev            # http://localhost:3000
 ```
 
-### 環境変数
+### Environment variables
 
-`.env.example` を参照してください(microCMS のサービスドメイン / API キー、メール送信先と SMTP、reCAPTCHA のシークレットキー)。
+See `.env.example`: microCMS service domain and API key, the contact recipient and SMTP settings, and the reCAPTCHA secret key.
 
 ## Scripts
 
 ```bash
-npm run dev       # 開発サーバー
-npm run build     # 本番ビルド
-npm run preview   # ビルドのプレビュー
-npm run generate  # 静的生成
+npm run dev       # development server
+npm run build     # production build
+npm run preview   # preview the production build
+npm run generate  # static generation
 ```
 
-## Directory
+## Directory structure
 
 ```
-assets/scss/   style.scss(ヒーロー・共通) / design.scss(各セクション・下層ページ)
+assets/scss/   style.scss (hero and shared) / design.scss (sections and sub pages)
 components/    Header / Footer / Contact / Cta
-composables/   useReveal(スクロールリビール) / usePageReveal
+composables/   useReveal (scroll reveal) / usePageReveal
 pages/         index / about / skills / blog / articles/[slug] / thanks / error
-server/api/    blogs(microCMS) / contact(メール送信)
-error.vue      404・エラーページ
+server/api/    blogs (microCMS) / contact (mail delivery)
+error.vue      404 and error page
 ```
 
 ## Credits
 
-- Skills セクションの写真: [Aleksi Tappura / Unsplash](https://unsplash.com/photos/mCg0ZgD7BgU)
+- Skills section photo: [Aleksi Tappura / Unsplash](https://unsplash.com/photos/mCg0ZgD7BgU)
