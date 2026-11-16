@@ -102,7 +102,7 @@ onMounted(() => {
 			yTo(e.clientY)
 			const t = e.target as Element | null
 			c.classList.toggle('is-hover', !!t?.closest?.('a, button, .skill-row, input, textarea'))
-			c.classList.toggle('is-dark', !!t?.closest?.('.news, .band, .contact, .site-footer, .sp-panel'))
+			c.classList.toggle('is-dark', !!t?.closest?.('.band, .contact, .site-footer, .sp-panel'))
 		}
 		onLeave = () => c.classList.remove('is-visible')
 		window.addEventListener('mousemove', onMove)

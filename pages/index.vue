@@ -98,6 +98,7 @@
 
       <div class="back-text-container">
         <div class="left-side">
+          <span class="eyebrow light"><span class="num">01</span>About</span>
           <div class="text-title green">
             <h2 class="bg-title">Elevate Your Web Development<br>The Advantages of Nuxt 3</h2>
           </div>
@@ -105,7 +106,9 @@
             <p class="green">Nuxt 3 is based on Vue 3, offering high performance and efficient development support. It
               features automatic routing, SSR (Server-Side Rendering), and SSG (Static Site Generation), making
               customization and extension easy. A large community and ecosystem add to its appeal.</p>
-            <NuxtLink to="/about" class="detail-btn">Show Detail</NuxtLink>
+            <NuxtLink to="/about" class="btn-line light">Show Detail
+              <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M1 5h14M11 1l4 4-4 4" stroke="currentColor" stroke-width="1.4" /></svg>
+            </NuxtLink>
           </div>
         </div>
         <p class="section-title about-title">About</p>
@@ -113,12 +116,20 @@
     </section>
     <!-- ===== Latest News ===== -->
     <section v-if="latestBlog" class="s news" aria-label="Latest News">
-      <div class="container news-in">
-        <span class="news-label"><i class="dot"></i>Latest News</span>
-        <time :datetime="latestBlog.publishedAt">{{ formatDate(latestBlog.publishedAt) }}</time>
-        <NuxtLink class="news-link" :to="`/articles/${latestBlog.id}`"><span>{{ latestBlog.title }}</span></NuxtLink>
-        <NuxtLink class="news-all" to="/blog">All posts
-          <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.4" /></svg>
+      <div class="container">
+        <div class="news-top">
+          <span class="news-label"><i class="dot"></i>Latest News</span>
+          <NuxtLink class="news-all" to="/blog">All posts
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.4" /></svg>
+          </NuxtLink>
+        </div>
+        <NuxtLink class="news-card" :to="`/articles/${latestBlog.id}`">
+          <div class="news-thumb"><img v-if="latestBlog.eyecatch?.url" :src="latestBlog.eyecatch.url" :alt="`Cover image for ${latestBlog.title}`" width="400" height="300"></div>
+          <div class="news-text">
+            <div class="news-meta"><time :datetime="latestBlog.publishedAt">{{ formatDate(latestBlog.publishedAt) }}</time><span v-if="latestBlog.category?.name" class="cat">{{ latestBlog.category.name }}</span></div>
+            <strong class="news-title">{{ latestBlog.title }}</strong>
+          </div>
+          <span class="news-arrow" aria-hidden="true"><svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M1 5h14M11 1l4 4-4 4" stroke="currentColor" stroke-width="1.4" /></svg></span>
         </NuxtLink>
       </div>
     </section>
@@ -134,7 +145,7 @@
         <div class="skills-grid">
           <figure class="skills-visual">
             <div class="badge" aria-hidden="true">
-              <svg viewBox="0 0 100 100"><defs><path id="circ" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0" /></defs><text font-family="Lato, sans-serif" font-size="8.6" font-weight="700" letter-spacing="3.2" fill="currentColor"><textPath href="#circ">MODERN JS · NUXT 3 · GSAP · TYPESCRIPT ·</textPath></text></svg>
+              <svg viewBox="0 0 100 100"><defs><path id="circ" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0" /></defs><text font-family="Lato, sans-serif" font-size="6.6" font-weight="700" fill="currentColor"><textPath href="#circ" textLength="234" lengthAdjust="spacing">MODERN JS · NUXT 3 · GSAP · TYPESCRIPT ·</textPath></text></svg>
             </div>
             <div class="img-reveal"><img src="/keybord.webp" alt="キーボードのクローズアップ" loading="lazy"></div>
             <figcaption><span>Since JavaScript</span><span>— Ever evolving</span></figcaption>
