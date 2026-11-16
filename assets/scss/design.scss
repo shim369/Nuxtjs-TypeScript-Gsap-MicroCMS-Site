@@ -83,7 +83,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   backdrop-filter: saturate(1.4) blur(14px);
   box-shadow: 0 1px 0 var(--line);
 }
-.site-header.is-hidden { transform: translateY(-100%); }
 .hd-inner {
   display: flex;
   align-items: center;

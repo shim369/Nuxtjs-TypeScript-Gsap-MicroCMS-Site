@@ -2,7 +2,7 @@
 	<div class="progress" ref="progress" aria-hidden="true"></div>
 	<div class="cursor" ref="cursor" aria-hidden="true"></div>
 
-	<header :class="['site-header', { 'is-solid': solid, 'is-hidden': hidden }]">
+	<header :class="['site-header', { 'is-solid': solid }]">
 		<div class="hd-inner">
 			<NuxtLink to="/" class="hd-logo" aria-label="Nuxt Base ホーム"><span class="hd-mark">N</span>Nuxt Base</NuxtLink>
 			<nav class="hd-nav" aria-label="メインメニュー">
@@ -40,11 +40,8 @@ const nuxtApp = useNuxtApp()
 
 const isOpen = ref(false)
 const solid = ref(false)
-const hidden = ref(false)
 const progress = ref<HTMLElement | null>(null)
 const cursor = ref<HTMLElement | null>(null)
-
-let lastY = 0
 
 const onScroll = () => {
 	const y = window.scrollY
@@ -54,9 +51,6 @@ const onScroll = () => {
 	// トップページは hero を抜けた後だけ、それ以外は少しスクロールしたら背景を付ける
 	const pastHero = route.path === '/' ? (news ? news.getBoundingClientRect().top <= h : false) : y > 40
 	solid.value = pastHero
-	if (pastHero && y > lastY + 4 && !isOpen.value) hidden.value = true
-	else if (y < lastY - 4 || !pastHero) hidden.value = false
-	lastY = y
 
 	if (progress.value) {
 		const max = document.documentElement.scrollHeight - window.innerHeight
@@ -80,7 +74,6 @@ let onMove: ((e: MouseEvent) => void) | null = null
 let onLeave: (() => void) | null = null
 
 onMounted(() => {
-	lastY = window.scrollY
 	window.addEventListener('scroll', onScroll, { passive: true })
 	window.addEventListener('resize', onScroll)
 	document.addEventListener('keydown', onKey)
