@@ -1,30 +1,36 @@
 <template>
-    <main class="under-main">
-        <section class="skills">
-            <div class="bg"></div>
-            <h1>skills</h1>
-            <h2 data-aos="fade-up">My Journey in Tech</h2>
-
-            <p class="read-text" data-aos="fade-up">When I first set foot in the world of programming, my starting point was
-                JavaScript. Over the years, my technical prowess has evolved exponentially, mastering a vast array of
-                frameworks and languages.</p>
-
-            <div class="flex-box" data-aos="fade-up">
-                <div class="flex-item" v-for="skill in skills" :key="skill.title">
-                    <h2>{{ skill.title }}</h2>
-                    <p>{{ skill.description }}</p>
-                </div>
+    <main class="page">
+        <header class="page-head">
+            <div class="container">
+                <span class="eyebrow" data-reveal><span class="num">01</span>Skills</span>
+                <h1 class="display split">My Journey in <em>Tech</em></h1>
+                <p class="page-lead" data-reveal>When I first set foot in the world of programming, my starting point was
+                    JavaScript. Over the years, my technical prowess has evolved exponentially, mastering a vast array of
+                    frameworks and languages.</p>
             </div>
+            <span class="ghost" aria-hidden="true">Skills</span>
+        </header>
 
-            <p data-aos="fade-up">These are but a glimpse of the skills I possess. In a world that continually evolves with
-                technology, I consistently strive to keep abreast of the latest trends and techniques, ensuring that I
-                deliver the best results in every project.</p>
-
-            <Cta />
+        <section class="page-body">
+            <div class="container">
+                <div class="card-grid">
+                    <article class="info-card" v-for="(skill, index) in skills" :key="skill.title" data-reveal>
+                        <span class="big">{{ String(index + 1).padStart(2, '0') }}</span>
+                        <h2>{{ skill.title }}</h2>
+                        <p>{{ skill.description }}</p>
+                    </article>
+                </div>
+                <p class="page-outro" data-reveal>These are but a glimpse of the skills I possess. In a world that continually evolves with
+                    technology, I consistently strive to keep abreast of the latest trends and techniques, ensuring that I
+                    deliver the best results in every project.</p>
+            </div>
         </section>
+        <Cta />
     </main>
 </template>
 <script setup lang="ts">
+usePageReveal()
+
 useHead({
     title: 'Skills | Nuxt Base',
     meta: [

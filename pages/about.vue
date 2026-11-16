@@ -1,33 +1,42 @@
 <template>
-    <main class="under-main">
-        <section class="about">
-            <div class="bg"></div>
-            <h1>about</h1>
-            <h2 data-aos="fade-up">Elevate Your Web Development with Nuxt 3</h2>
-            <p class="read-text" data-aos="fade-up">Web development has been evolving rapidly, and in this era of change,
-                Nuxt 3 emerges as an avant-garde framework that empowers developers to craft impeccable web experiences.
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio distinctio optio quaerat error esse deleniti
-                quos velit vitae ad pariatur voluptate iste officia laborum, nobis unde delectus libero consectetur dolorum!
-            </p>
-
-            <hr>
-
-            <h2 data-aos="fade-up">Why Nuxt 3?</h2>
-            <div class="flex-box" data-aos="fade-up">
-                <div class="flex-item" v-for="(feature, index) in features" :key="index">
-                    <h2>{{ feature.title }}</h2>
-                    <p>{{ feature.description }}</p>
-                </div>
+    <main class="page">
+        <header class="page-head">
+            <div class="container">
+                <span class="eyebrow" data-reveal><span class="num">01</span>About</span>
+                <h1 class="display split">Elevate your web development with <em>Nuxt 3</em></h1>
+                <p class="page-lead" data-reveal>Web development has been evolving rapidly, and in this era of change,
+                    Nuxt 3 emerges as an avant-garde framework that empowers developers to craft impeccable web experiences.
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio distinctio optio quaerat error esse deleniti
+                    quos velit vitae ad pariatur voluptate iste officia laborum, nobis unde delectus libero consectetur dolorum!
+                </p>
             </div>
-            <p data-aos="fade-up">In a nutshell, Nuxt 3 is not just a framework; it's a movement towards a more efficient,
-                performative, and seamless web development experience. Whether you're building a personal blog, an
-                e-commerce site, or a large-scale web application, Nuxt 3 provides a robust foundation to ensure success.
-            </p>
-            <Cta />
+            <span class="ghost" aria-hidden="true">About</span>
+        </header>
+
+        <section class="page-body">
+            <div class="container">
+                <div class="sec-head">
+                    <span class="eyebrow" data-reveal><span class="num">02</span>Why Nuxt 3?</span>
+                </div>
+                <div class="card-grid">
+                    <article class="info-card" v-for="(feature, index) in features" :key="index" data-reveal>
+                        <span class="big">{{ String(index + 1).padStart(2, '0') }}</span>
+                        <h2>{{ feature.title }}</h2>
+                        <p>{{ feature.description }}</p>
+                    </article>
+                </div>
+                <p class="page-outro" data-reveal>In a nutshell, Nuxt 3 is not just a framework; it's a movement towards a more efficient,
+                    performative, and seamless web development experience. Whether you're building a personal blog, an
+                    e-commerce site, or a large-scale web application, Nuxt 3 provides a robust foundation to ensure success.
+                </p>
+            </div>
         </section>
+        <Cta />
     </main>
 </template>
 <script setup lang="ts">
+usePageReveal()
+
 useHead({
     title: 'About | Nuxt Base',
     meta: [
