@@ -147,7 +147,7 @@
             <div class="badge" aria-hidden="true">
               <svg viewBox="0 0 100 100"><defs><path id="circ" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0" /></defs><text font-family="Lato, sans-serif" font-size="6.6" font-weight="700" fill="currentColor"><textPath href="#circ" textLength="234" lengthAdjust="spacing">MODERN JS · NUXT 3 · GSAP · TYPESCRIPT ·</textPath></text></svg>
             </div>
-            <div class="img-reveal"><img src="/keybord.webp" alt="キーボードのクローズアップ" loading="lazy"></div>
+            <div class="img-reveal"><img src="/skills.webp" alt="ベージュの木製デスクに置かれたノートPC" loading="lazy"></div>
             <figcaption><span>Since JavaScript</span><span>— Ever evolving</span></figcaption>
           </figure>
           <div class="skills-body">

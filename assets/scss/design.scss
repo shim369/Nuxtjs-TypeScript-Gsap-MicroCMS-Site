@@ -980,3 +980,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 /* hero はピン留めされたまま、後続セクションが上から重なって覆っていく(背景ごと前面に出す) */
 .wrapper > .s { position: relative; z-index: 2; }
+
+/* Skills 画像: サイトの暖色トーンになじませる */
+.img-reveal::after { content: ""; position: absolute; inset: 0; background: linear-gradient(160deg, rgba(223, 193, 144, .22), rgba(145, 105, 41, .18)); mix-blend-mode: multiply; pointer-events: none; }
