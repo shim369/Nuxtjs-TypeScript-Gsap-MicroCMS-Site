@@ -42,7 +42,7 @@
 </template>
 <script lang="ts" setup>
 import { useForm } from 'vee-validate'
-import { VueReCaptcha, useReCaptcha } from 'vue-recaptcha-v3'
+import { useReCaptcha } from 'vue-recaptcha-v3'
 
 const schema = {
   name (value: string) {
@@ -71,16 +71,8 @@ const { useFieldModel, handleSubmit, errors } = useForm({
 
 const [name, email, message] = useFieldModel(['name', 'email', 'message'])
 
-const { vueApp } = useNuxtApp()
-	vueApp.use(VueReCaptcha, {
-	siteKey: '6Lf8DVUoAAAAAOj7-WXMaIfuRlWpmcpbp48ay4oc',
-	loaderOptions: {
-		renderParameters: {
-			hl: 'en'
-		}
-	}
-})
-const recaptchaInstance = useReCaptcha()
+// reCAPTCHA は plugins/recaptcha.client.ts で登録(クライアントのみ)
+const recaptchaInstance = import.meta.client ? useReCaptcha() : undefined
 
 const sending = ref(false)
 const root = ref<HTMLElement | null>(null)
