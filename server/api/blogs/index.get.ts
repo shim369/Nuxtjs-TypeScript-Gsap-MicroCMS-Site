@@ -1,4 +1,4 @@
-import type { ArticleResponse } from '~/types/article'
+import type { ArticleResponse } from '#shared/types/article'
 
 export default defineEventHandler(async () => {
   const client = useMicroCMSClient()

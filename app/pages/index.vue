@@ -100,12 +100,10 @@
         <div class="left-side">
           <span class="eyebrow light"><span class="num">01</span>About</span>
           <div class="text-title green">
-            <h2 class="bg-title">Elevate Your Web Development<br>The Advantages of Nuxt 3</h2>
+            <h2 class="bg-title">Elevate Your Web Development<br>The Advantages of Nuxt 4</h2>
           </div>
           <div class="text-container">
-            <p class="green">Nuxt 3 is based on Vue 3, offering high performance and efficient development support. It
-              features automatic routing, SSR (Server-Side Rendering), and SSG (Static Site Generation), making
-              customization and extension easy. A large community and ecosystem add to its appeal.</p>
+            <p class="green">Nuxt 4 is built on Vue 3, offering high performance and efficient development support. A cleaner app/ directory, smarter data fetching and type safety by default come together with automatic routing, SSR (Server-Side Rendering) and SSG (Static Site Generation), making customization and extension easy. A large community and ecosystem add to its appeal.</p>
             <NuxtLink to="/about" class="btn-line light">Show Detail
               <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M1 5h14M11 1l4 4-4 4" stroke="currentColor" stroke-width="1.4" /></svg>
             </NuxtLink>
@@ -145,7 +143,7 @@
         <div class="skills-grid">
           <figure class="skills-visual">
             <div class="badge" aria-hidden="true">
-              <svg viewBox="0 0 100 100"><defs><path id="circ" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0" /></defs><text font-family="Lato, sans-serif" font-size="6.6" font-weight="700" fill="currentColor"><textPath href="#circ" textLength="234" lengthAdjust="spacing">MODERN JS · NUXT 3 · GSAP · TYPESCRIPT ·</textPath></text></svg>
+              <svg viewBox="0 0 100 100"><defs><path id="circ" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0" /></defs><text font-family="Lato, sans-serif" font-size="6.6" font-weight="700" fill="currentColor"><textPath href="#circ" textLength="234" lengthAdjust="spacing">MODERN JS · NUXT 4 · GSAP · TYPESCRIPT ·</textPath></text></svg>
             </div>
             <div class="img-reveal"><img src="/skills.webp" alt="ベージュの木製デスクに置かれたノートPC" loading="lazy"></div>
             <figcaption><span>Since JavaScript</span><span>— Ever evolving</span></figcaption>
@@ -168,7 +166,7 @@
     <!-- ===== Marquee ===== -->
     <section class="s marquee" aria-hidden="true">
       <div class="mq-track">
-        <div class="mq-group" v-for="n in 2" :key="n"><span>Nuxt 3</span><i>✦</i><span class="o">TypeScript</span><i>✦</i><span>GSAP</span><i>✦</i><span class="o">microCMS</span><i>✦</i></div>
+        <div class="mq-group" v-for="n in 2" :key="n"><span>Nuxt 4</span><i>✦</i><span class="o">TypeScript</span><i>✦</i><span>GSAP</span><i>✦</i><span class="o">microCMS</span><i>✦</i></div>
       </div>
     </section>
 
@@ -200,7 +198,7 @@
             <span class="big">ii.</span>
             <h3>Build</h3>
             <p>Vue- and React-based frameworks with automatic routing, SSR and SSG — chosen to fit the project, typed end to end.</p>
-            <div class="tags"><span>Nuxt 3</span><span>Next.js</span><span>Astro</span><span>TypeScript</span></div>
+            <div class="tags"><span>Nuxt 4</span><span>Next.js</span><span>Astro</span><span>TypeScript</span></div>
           </article>
           <article class="step" data-reveal>
             <span class="big">iii.</span>
@@ -248,7 +246,7 @@
       <div class="container cta-in">
         <span class="eyebrow" data-reveal><span class="num">05</span>Let's talk</span>
         <h2 class="cta-title split" id="ctaTitle">Ready to Embrace <em>Modern</em> Web Development?</h2>
-        <p data-reveal>Leading with Nuxt3, I leverage the latest JavaScript technologies to enhance your business or project's web presence quickly and efficiently. Join us now to create a next-generation web experience.</p>
+        <p data-reveal>Leading with Nuxt 4, I leverage the latest JavaScript technologies to enhance your business or project's web presence quickly and efficiently. Join us now to create a next-generation web experience.</p>
         <a href="#contact" class="btn-round magnetic" data-reveal><span class="lbl">Contact
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 12L12 2M4 2h8v8" stroke="currentColor" stroke-width="1.4" /></svg></span></a>
       </div>
@@ -259,23 +257,23 @@
 import { computed, onMounted, onBeforeUnmount } from 'vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import type { ArticleResponse } from '~/types/article';
+import type { ArticleResponse } from '#shared/types/article';
 
 const { data } = await useFetch<ArticleResponse>('/api/blogs', { key: 'articles' });
-const articles = data.value?.contents ?? [];
+const articles = computed(() => data.value?.contents ?? []);
 
 const latestBlog = computed(() => {
-  return articles ? articles[0] : null;
+  return articles.value[0] ?? null;
 });
 
 const nextBlogs = computed(() => {
-  return articles ? articles.slice(1, 4) : [];
+  return articles.value.slice(1, 4);
 });
 
 const skills = [
   { name: 'Astro', role: 'Static Site Generation' },
   { name: 'Next.js', role: 'Server-Side Rendering' },
-  { name: 'Nuxt.js', role: 'Server-Side Rendering' },
+  { name: 'Nuxt', role: 'Server-Side Rendering' },
   { name: 'Python & Django', role: 'Back-end Development' },
   { name: 'microCMS', role: 'Content Management' },
   { name: 'Figma', role: 'Design & Prototyping' }
@@ -286,7 +284,7 @@ let cleanupReveal: (() => void) | null = null;
 const disposers: (() => void)[] = [];
 
 onMounted(() => {
-  if (process.client) {
+  if (import.meta.client) {
     ctx = gsap.context(() => {
     const svg = document.querySelector<SVGSVGElement>('#svgTxt');
 
@@ -477,19 +475,8 @@ const initDesign = () => {
   disposers.push(() => window.removeEventListener('load', refresh));
 };
 
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-
-  return `${year}.${month}.${day}`;
-};
-
-useHead({
+useSeoMeta({
   title: 'Nuxt Base',
-  meta: [
-    { name: 'description', content: 'Nuxt Base is Web site by Nuxt.js' }
-  ]
+  description: 'Nuxt Base is Web site by Nuxt.js'
 })
 </script>

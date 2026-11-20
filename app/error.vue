@@ -19,5 +19,5 @@ const props = defineProps<{ error: NuxtError }>()
 const is404 = computed(() => props.error?.statusCode === 404)
 const handleError = () => clearError({ redirect: '/' })
 
-useHead({ title: is404.value ? '404 | Nuxt Base' : 'Error | Nuxt Base' })
+useSeoMeta({ title: () => (is404.value ? '404 | Nuxt Base' : 'Error | Nuxt Base'), robots: 'noindex' })
 </script>

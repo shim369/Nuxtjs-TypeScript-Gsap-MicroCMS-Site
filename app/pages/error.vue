@@ -13,10 +13,8 @@
 <script lang="ts" setup>
 usePageReveal()
 
-useHead({
+useSeoMeta({
   title: 'Error',
-  meta: [
-    { name: 'description', content: '問い合わせの送信が失敗しました' }
-  ]
+  description: '問い合わせの送信が失敗しました'
 })
 </script>

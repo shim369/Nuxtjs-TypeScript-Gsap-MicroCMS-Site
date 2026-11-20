@@ -31,11 +31,9 @@
 <script setup lang="ts">
 usePageReveal()
 
-useHead({
-    title: 'Skills | Nuxt Base',
-    meta: [
-        { name: 'description', content: 'Nuxt Base is a website by Nuxt 3' }
-    ]
+useSeoMeta({
+  title: 'Skills | Nuxt Base',
+  description: 'Nuxt Base is a website by Nuxt 4'
 })
 
 const skills = ref([
@@ -48,8 +46,8 @@ const skills = ref([
         description: 'With Next.js, I deliver efficient server-side rendering, providing a seamless browsing experience for users.'
     },
     {
-        title: 'Nuxt.js Powerful Server-Side Rendering',
-        description: 'Using Nuxt.js, I ensure powerful server-side rendering, resulting in a smooth and uninterrupted browsing experience for users.'
+        title: 'Nuxt Powerful Server-Side Rendering',
+        description: 'With Nuxt 4, I build on a cleaner app/ structure, smarter data fetching and lazy hydration to deliver fast, smooth server-rendered experiences.'
     },
     {
         title: 'Back-End Development with Python and Django',

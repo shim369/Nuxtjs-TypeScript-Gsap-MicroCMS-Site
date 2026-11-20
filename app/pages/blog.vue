@@ -23,26 +23,15 @@
     </main>
 </template>
 <script setup lang="ts">
-import type { ArticleResponse } from '~/types/article'
+import type { ArticleResponse } from '#shared/types/article'
 
 const { data } = await useFetch<ArticleResponse>('/api/blogs', { key: 'articles' })
-const articles = data.value?.contents ?? []
+const articles = computed(() => data.value?.contents ?? [])
 
 usePageReveal()
 
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-
-  return `${year}.${month}.${day}`;
-};
-
-useHead({
+useSeoMeta({
   title: 'Blog | Nuxt Base',
-  meta: [
-    { name: 'description', content: 'Nuxt Base is a website by Nuxt 3' }
-  ]
+  description: 'Nuxt Base is a website by Nuxt 4'
 })
 </script>

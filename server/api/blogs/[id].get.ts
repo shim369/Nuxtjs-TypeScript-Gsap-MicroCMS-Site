@@ -1,4 +1,4 @@
-import type { Article } from '~/types/article'
+import type { Article } from '#shared/types/article'
 
 export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, 'id')
