@@ -4,10 +4,8 @@ export default defineNuxtConfig({
   build: {
     transpile: ['gsap']
   },
-  modules: [
-    'nuxt-aos',
-    '@nuxtjs/google-fonts'
-  ],
+  compatibilityDate: '2026-11-21',
+  modules: ['@nuxtjs/google-fonts'],
   googleFonts: {
     families: {
       Lato: [300, 400, 700, 900],
@@ -24,12 +22,6 @@ export default defineNuxtConfig({
         {
           rel: "preconnect",
           href: "https://fonts.googleapis.com",
-        },
-        {
-          rel: 'preload',
-          as: 'style',
-          href: 'https://fonts.googleapis.com/icon?family=Material+Icons&display=swap',
-          crossorigin: "",
         }
       ]
     }
