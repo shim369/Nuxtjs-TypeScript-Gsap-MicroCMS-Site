@@ -2,7 +2,7 @@
 
 **English** | [日本語](README.ja.md)
 
-A portfolio site built with Nuxt 3, TypeScript, GSAP and microCMS.
+A portfolio site built with Nuxt 4, TypeScript, GSAP and microCMS.
 It features a ScrollTrigger-driven hero with a mask-zoom reveal, a microCMS-powered blog, and a self-hosted contact form (Nodemailer + reCAPTCHA v3).
 
 ## Screenshots
@@ -17,6 +17,7 @@ It features a ScrollTrigger-driven hero with a mask-zoom reveal, a microCMS-powe
 
 ## Features
 
+- Built on Nuxt 4: `app/` directory, shared types in `shared/`, typed `useFetch`, client-only reCAPTCHA plugin, lazy hydration for Contact and Footer
 - Hero where the loader text is traced stroke by stroke, then a mask zooms in to reveal the content (GSAP ScrollTrigger)
 - Home page sections: Latest News / Skills / Marquee / Approach / Blog / CTA / Contact
 - Scroll-linked text and image reveals, custom cursor, scroll progress bar and magnetic buttons
@@ -26,7 +27,7 @@ It features a ScrollTrigger-driven hero with a mask-zoom reveal, a microCMS-powe
 
 ## Tech Stack
 
-- [Nuxt 3](https://nuxt.com/) / Vue 3 / TypeScript
+- [Nuxt 4](https://nuxt.com/) / Vue 3 / TypeScript
 - [GSAP](https://gsap.com/) + ScrollTrigger
 - [microCMS](https://microcms.io/)
 - Nodemailer / vee-validate / vue-recaptcha-v3
@@ -51,17 +52,22 @@ npm run dev       # development server
 npm run build     # production build
 npm run preview   # preview the production build
 npm run generate  # static generation
+npm run typecheck # type check (vue-tsc via nuxt typecheck)
 ```
 
 ## Directory structure
 
 ```
-assets/scss/   style.scss (hero and shared) / design.scss (sections and sub pages)
-components/    Header / Footer / Contact / Cta
-composables/   useReveal (scroll reveal) / usePageReveal
-pages/         index / about / skills / blog / articles/[slug] / thanks / error
-server/api/    blogs (microCMS) / contact (mail delivery)
-error.vue      404 and error page
+app/
+  assets/scss/   style.scss (hero and shared) / design.scss (sections and sub pages)
+  components/    Header / Footer / Contact / Cta
+  composables/   useReveal (scroll reveal) / usePageReveal
+  pages/         index / about / skills / blog / articles/[slug] / thanks / error
+  plugins/       recaptcha.client.ts
+  utils/         formatDate
+  error.vue      404 and error page
+server/api/      blogs (microCMS) / contact (mail delivery)
+shared/types/    Article types shared by app and server
 ```
 
 ## Credits

@@ -2,7 +2,7 @@
 
 [English](README.md) | **日本語**
 
-Nuxt 3 / TypeScript / GSAP / microCMS で作ったポートフォリオサイトです。
+Nuxt 4 / TypeScript / GSAP / microCMS で作ったポートフォリオサイトです。
 ScrollTrigger によるヒーローのマスク拡大アニメーションと、ブログ(microCMS)・お問い合わせフォーム(Nodemailer + reCAPTCHA v3)を備えています。
 
 ## Screenshots
@@ -17,6 +17,7 @@ ScrollTrigger によるヒーローのマスク拡大アニメーションと、
 
 ## Features
 
+- Nuxt 4 構成: `app/` ディレクトリ、`shared/` の共有型、型付き `useFetch`、クライアント専用の reCAPTCHA プラグイン、Contact / Footer の遅延ハイドレーション
 - ローディングで文字の輪郭をなぞって描画 → マスクが拡大してコンテンツが現れるヒーロー(GSAP ScrollTrigger)
 - Latest News / Skills / Marquee / Approach / Blog / CTA / Contact のトップページ構成
 - スクロール連動のテキスト・画像リビール、カスタムカーソル、スクロール進捗バー、マグネティックボタン
@@ -26,7 +27,7 @@ ScrollTrigger によるヒーローのマスク拡大アニメーションと、
 
 ## Tech Stack
 
-- [Nuxt 3](https://nuxt.com/) / Vue 3 / TypeScript
+- [Nuxt 4](https://nuxt.com/) / Vue 3 / TypeScript
 - [GSAP](https://gsap.com/) + ScrollTrigger
 - [microCMS](https://microcms.io/)
 - Nodemailer / vee-validate / vue-recaptcha-v3
@@ -51,17 +52,22 @@ npm run dev       # 開発サーバー
 npm run build     # 本番ビルド
 npm run preview   # ビルドのプレビュー
 npm run generate  # 静的生成
+npm run typecheck # 型チェック(nuxt typecheck)
 ```
 
 ## Directory
 
 ```
-assets/scss/   style.scss(ヒーロー・共通) / design.scss(各セクション・下層ページ)
-components/    Header / Footer / Contact / Cta
-composables/   useReveal(スクロールリビール) / usePageReveal
-pages/         index / about / skills / blog / articles/[slug] / thanks / error
-server/api/    blogs(microCMS) / contact(メール送信)
-error.vue      404・エラーページ
+app/
+  assets/scss/   style.scss(ヒーロー・共通) / design.scss(各セクション・下層ページ)
+  components/    Header / Footer / Contact / Cta
+  composables/   useReveal(スクロールリビール) / usePageReveal
+  pages/         index / about / skills / blog / articles/[slug] / thanks / error
+  plugins/       recaptcha.client.ts
+  utils/         formatDate
+  error.vue      404・エラーページ
+server/api/      blogs(microCMS) / contact(メール送信)
+shared/types/    app と server で共有する記事の型
 ```
 
 ## Credits
